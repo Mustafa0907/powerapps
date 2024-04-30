@@ -1,0 +1,2024 @@
+Screen5_5 As screen:
+    ContentLanguage: =""
+
+    Container6_22 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =1740
+        X: =395
+        Y: =150
+        ZIndex: =1
+
+        Label2_91 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Order ID"
+            Width: =273
+            X: =41
+            Y: =219
+            ZIndex: =1
+
+        Gallery6_4 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =456
+            Items: |
+                =//Sort(PurchaseOrder, Created,SortOrder.Descending)
+                Sort(
+                    Filter(
+                        PurchaseOrder,
+                        Created >= DatePicker2.SelectedDate,
+                        Created <= DatePicker2_1.SelectedDate,
+                        TotalPrice >= Int(TextInput4.Text),
+                        TotalPrice <= Int(TextInput4_1.Text)
+                    ),
+                    Created,
+                    SortOrder.Descending
+                )
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =41
+            Transition: =Transition.Pop
+            Visible: =showPO
+            Width: =1699
+            X: =41
+            Y: =270
+            ZIndex: =2
+
+            Button6_5 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =38
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1669
+                Y: =2
+                ZIndex: =1
+
+            Button6_13 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =41
+                HoverFill: =Self.Fill
+                OnSelect: |-
+                    =UpdateContext({POVisible : true});
+                    Set(varNewPO, LookUp(PurchaseOrder, ID = ThisItem.ID));
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1667
+                X: =2
+                ZIndex: =2
+
+            Label7_13 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: |
+                    =ThisItem.Created
+                Width: =210
+                X: =710
+                ZIndex: =3
+
+            Label7_18 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.TotalPrice
+                Width: =171
+                X: =1403
+                ZIndex: =4
+
+            Label7_17 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =39
+                X: =1432
+                ZIndex: =5
+
+            Label7_12 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.ID
+                Width: =253
+                Y: =1
+                ZIndex: =6
+
+            Image5 As image:
+                Height: =28
+                Image: ='credit-card'
+                OnSelect: =Select(Parent)
+                Visible: =!showPO
+                Width: =67
+                X: =1604
+                Y: =6
+                ZIndex: =7
+
+            Button10 As button:
+                BorderThickness: =0
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =39
+                HoverFill: =
+                OnSelect: |
+                    =Navigate(Screen5_4);
+                    Set(varNewSO, LookUp(SalesOrder, ID = ThisItem.ID));
+                PressedBorderColor: =
+                PressedFill: =ColorFade(Self.Color, 98%)
+                Text: =""
+                Visible: =!showPO
+                Width: =69
+                X: =1617
+                Y: =2
+                ZIndex: =8
+
+        Label2_94 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Order Date"
+            Width: =282
+            X: =731
+            Y: =219
+            ZIndex: =3
+
+        Label2_92 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Order Status"
+            Visible: =!showPO
+            Width: =262
+            X: =369
+            Y: =219
+            ZIndex: =4
+
+        Label2_114 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Price per Unit"
+            Visible: =false
+            Width: =276
+            X: =1224
+            Y: =110
+            ZIndex: =7
+
+        Label2_93 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Total"
+            Width: =234
+            X: =1421
+            Y: =219
+            ZIndex: =8
+
+        Label2_90 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =47
+            Size: =22
+            Text: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", "Order Management", "My Orders")
+            Width: =417
+            X: =41
+            Y: =40
+            ZIndex: =9
+
+        Label2_115 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =38
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Payment Status"
+            Visible: =!showPO
+            Width: =194
+            X: =1145
+            Y: =219
+            ZIndex: =11
+
+        Button2_3 As button:
+            BorderThickness: =0
+            Color: =If(!showPO,RGBA(139, 154, 159, 1), Color.White)
+            Fill: =If(showPO,RGBA(109, 49, 162, 1), Color.White)
+            Height: =33
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(showPO, true)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Purchase Order"
+            Visible: =If(varRole = "Admin" , true, false)
+            Width: =240
+            X: =867
+            Y: =57
+            ZIndex: =12
+
+        Button2_4 As button:
+            BorderThickness: =0
+            Color: =If(showPO,RGBA(139, 154, 159, 1), Color.White)
+            Fill: =If(!showPO,RGBA(109, 49, 162, 1), Color.White)
+            Height: =33
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(showPO, false)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Sale Orders"
+            Visible: =If(varRole = "Admin", true, false)
+            Width: =240
+            X: =1107
+            Y: =57
+            ZIndex: =13
+
+        Gallery6_5 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =456
+            Items: |
+                =//Filter(Sort(SalesOrder, Created,SortOrder.Descending), 'Created By'.Email = User().Email)
+                
+                Sort(
+                    Filter(
+                        SalesOrder,
+                        'Created By'.Email = User().Email,
+                        Created >= DatePicker2.SelectedDate,
+                        Created <= DatePicker2_1.SelectedDate,
+                        TotalPrice >= Int(TextInput4.Text),
+                        TotalPrice <= Int(TextInput4_1.Text)
+                    ),
+                    Created,
+                    SortOrder.Descending
+                )
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =41
+            Transition: =Transition.Pop
+            Visible: =!showPO
+            Width: =1699
+            X: =41
+            Y: =270
+            ZIndex: =14
+
+            Button6_6 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =41
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1667
+                X: =2
+                ZIndex: =1
+
+            Button6_9 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =41
+                HoverFill: =Self.Fill
+                OnSelect: |-
+                    =UpdateContext({orderVisible : true});
+                    Set(varNewSO, LookUp(SalesOrder, ID = ThisItem.ID));
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1667
+                X: =2
+                ZIndex: =2
+
+            Label7_19 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: |
+                    =ThisItem.Created
+                Width: =210
+                X: =707
+                ZIndex: =3
+
+            Label7_22 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.TotalPrice
+                Width: =171
+                X: =1404
+                ZIndex: =4
+
+            Label7_23 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =39
+                X: =1426
+                ZIndex: =5
+
+            Label7_20 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.Status.Value
+                Visible: =!showPO
+                Width: =234
+                X: =325
+                ZIndex: =6
+
+            Label7_16 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =39
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.ID
+                Width: =141
+                X: =36
+                Y: =1
+                ZIndex: =7
+
+            Label7_21 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.PaymentStatus.Value
+                Visible: =!showPO
+                Width: =234
+                X: =1072
+                ZIndex: =8
+
+            Image5_1 As image:
+                Height: =28
+                Image: ='credit-card'
+                OnSelect: =Select(Parent)
+                Visible: =If(ThisItem.PaymentStatus.Value = "Paid", false,true)
+                Width: =67
+                X: =1586
+                Y: =7
+                ZIndex: =9
+
+            Button10_1 As button:
+                BorderThickness: =0
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =39
+                HoverFill: =
+                OnSelect: |
+                    =Navigate(Screen5_4);
+                    Set(varNewSO, LookUp(SalesOrder, ID = ThisItem.ID));
+                PressedBorderColor: =
+                PressedFill: =ColorFade(Self.Color, 98%)
+                Text: =""
+                Visible: =If(ThisItem.PaymentStatus.Value = "Paid", false,true)
+                Width: =69
+                X: =1584
+                Y: =2
+                ZIndex: =10
+
+        Button5_10 As button:
+            BorderThickness: =0
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =
+                UpdateContext({showScreen5_2 : true})
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="+ New"
+            Visible: =If(((varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2") && showPO), true, false)
+            Width: =200
+            X: =1438
+            Y: =48
+            ZIndex: =15
+
+        DatePicker2 As datepicker:
+            DefaultDate: =varFromDate
+            Height: =46
+            OnChange: |-
+                =UpdateContext({resetDate : false})
+            Reset: =resetDate
+            Width: =168
+            X: =83
+            Y: =146
+            ZIndex: =17
+
+        DatePicker2_1 As datepicker:
+            DefaultDate: =varToDate
+            Height: =46
+            OnChange: |-
+                =UpdateContext({resetDate : false})
+            Reset: =resetDate
+            Width: =168
+            X: =353
+            Y: =146
+            ZIndex: =18
+
+        Label2_126 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =27
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="To"
+            Width: =101
+            X: =251
+            Y: =154
+            ZIndex: =19
+
+        Label2_127 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: |-
+                ="Date:"
+            Width: =101
+            X: =81
+            Y: =104
+            ZIndex: =20
+
+        Label2_128 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: |-
+                ="Min:"
+            Width: =101
+            X: =648
+            Y: =114
+            ZIndex: =21
+
+        TextInput4 As text:
+            Default: =0
+            Format: =TextFormat.Number
+            Height: =38
+            OnChange: |-
+                =UpdateContext({resetPrice : false})
+            Reset: =resetPrice
+            Width: =168
+            X: =648
+            Y: =154
+            ZIndex: =22
+
+        Label2_129 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: |-
+                ="Max:"
+            Width: =99
+            X: =918
+            Y: =114
+            ZIndex: =23
+
+        TextInput4_1 As text:
+            Default: =100000
+            Format: =TextFormat.Number
+            Height: =38
+            OnChange: |-
+                =UpdateContext({resetPrice : false})
+            Reset: =resetPrice
+            Width: =168
+            X: =918
+            Y: =154
+            ZIndex: =24
+
+        Icon3 As icon.Cut:
+            Height: =19
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({resetDate : true})
+            Visible: =If(DatePicker2_1.SelectedDate = Today()+1 && DatePicker2.SelectedDate = DateValue("01 April 2023","en-GB"), false, true)
+            Width: =18
+            X: =541
+            Y: =159
+            ZIndex: =25
+
+        Icon3_1 As icon.Cut:
+            Height: =19
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({resetPrice : true})
+            Visible: =If(Int(TextInput4.Text) = 0 && Int(TextInput4_1.Text) = 100000, false, true)
+            Width: =18
+            X: =1101
+            Y: =159
+            ZIndex: =26
+
+    Container6_15 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =350
+        X: =15
+        Y: =150
+        ZIndex: =2
+
+        "Sidebar_8 As 'Admin Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToPo: =Screen5_1
+            NavigateToProducts: =Screen5
+            NavigateToSo: =Screen5_2
+            ZIndex: =5
+
+        "'Consumer Sidebar_6' As 'Consumer Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToProducts: =Screen5
+            NavigateToSo: =Screen5_2
+            Visible: =If(varRole = "Consumer", true, false)
+            ZIndex: =6
+
+        "'IM Sidebar_6' As 'IM Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToPo: =Screen5_1
+            NavigateToProducts: =Screen5
+            Visible: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2", true, false)
+            ZIndex: =7
+
+    Container6_14 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =112
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =2120
+        X: =15
+        Y: =20
+        ZIndex: =3
+
+        Label3_12 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =Parent.Height
+            Italic: =true
+            PaddingRight: =9.10
+            PaddingTop: =9.10
+            Size: =63.71
+            Text: ="ims"
+            Width: =228
+            ZIndex: =1
+
+        Label3_13 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =112
+            Italic: =true
+            PaddingRight: =9.10
+            Size: =63.71
+            Text: ="Inventory Management System"
+            Width: =1892
+            X: =228
+            ZIndex: =2
+
+        Label12_2 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Title
+            Width: =254
+            X: =1866
+            Y: =15
+            ZIndex: =3
+
+        Label12_3 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Role.Value
+            Width: =254
+            X: =1866
+            Y: =48
+            ZIndex: =4
+
+    Container6_26 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        RadiusBottomLeft: =10
+        RadiusBottomRight: =10
+        RadiusTopLeft: =10
+        RadiusTopRight: =10
+        Width: =350
+        X: =15
+        Y: =150
+        ZIndex: =4
+
+        Gallery8_4 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =740
+            Items: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2", Filter(SideBarGallery, Tab <> "Sale Orders"), If(varRole = "Consumer", Filter(SideBarGallery, Tab <> "Order Management"), SideBarGallery))
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =66
+            Width: =350
+            Y: =95
+            ZIndex: =2
+
+            Button3_21 As button:
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(109, 49, 162, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Normal
+                HoverColor: =ColorFade(Self.Fill, -20%)
+                HoverFill: =ColorFade(Self.Color, -20%)
+                OnSelect: |-
+                    =If(ThisItem.Tab = "Product Inventory", Navigate(Screen5));
+                    If(ThisItem.Tab = "Products", Navigate(Screen5));
+                    If(ThisItem.Tab = "Sale Orders", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "Cart", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "My Orders", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "Order Management", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "User Management", Navigate(Screen5_6));
+                    If(ThisItem.Tab = "My Approvals", Navigate(Screen5_8));
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18.21
+                Text: =ThisItem.Tab
+                Width: =339
+                X: =0.00
+                Y: =9
+                ZIndex: =3
+
+    Container6_27 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =showScreen5_2
+        Width: =1740
+        X: =395
+        Y: =150
+        ZIndex: =5
+
+        Label2_116 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Item Name"
+            Width: =273
+            X: =40
+            Y: =108
+            ZIndex: =1
+
+        Gallery6_6 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =351
+            Items: =PurchaseOrderCollection
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =41
+            Transition: =""
+            Width: =1732
+            X: =8
+            Y: =165
+            ZIndex: =1
+
+            Button6_8 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1684
+                X: =2
+                ZIndex: =1
+
+            Icon1_5 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =19
+                Icon: =Icon.Trash
+                OnSelect: =Remove(PurchaseOrderCollection, ThisItem)
+                Width: =20
+                X: =1655
+                Y: =10
+                ZIndex: =9
+
+            Dropdown2_1 As dropdown:
+                Default: =
+                Items: =Filter(Products, IsDeleted = false)
+                OnChange: |-
+                    =
+                    Set(varUnit, Filter(Products, Name = Dropdown2_1.Selected.Title, Unit.Value ))
+                OnSelect: =Select(Parent)
+                SelectionFill: =RGBA(109, 49, 162, 1)
+                Width: =253
+                X: =31
+                ZIndex: =11
+
+            Label7_14 As label:
+                Align: =Align.Center
+                BorderThickness: =2
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: |
+                    =LookUp(
+                        Inventories,
+                        ProductID.Id = LookUp(
+                            Products,
+                            SKU = ComboBox1_1.Selected.SKU).ID).ID
+                Visible: =false
+                X: =415
+                ZIndex: =12
+
+            TextInput1_2 As text:
+                Color: =RGBA(106, 108, 125, 1)
+                Default: =0
+                FontWeight: =FontWeight.Bold
+                Format: =TextFormat.Number
+                OnSelect: =Select(Parent)
+                Width: =193
+                X: =491
+                ZIndex: =13
+
+            Label7_15 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =28
+                X: =463
+                ZIndex: =14
+
+            TextInput1_5 As text:
+                Color: =RGBA(106, 108, 125, 1)
+                Default: =0
+                FontWeight: =FontWeight.Bold
+                Format: =TextFormat.Number
+                Height: =41
+                OnSelect: =Select(Parent)
+                Width: =198
+                X: =858
+                ZIndex: =15
+
+            Label7_24 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =28
+                X: =830
+                ZIndex: =16
+
+            TextInput1_7 As text:
+                Color: =RGBA(106, 108, 125, 1)
+                Default: =""
+                FontWeight: =FontWeight.Bold
+                Format: =TextFormat.Number
+                Height: =41
+                OnChange: =
+                OnSelect: =Select(Parent)
+                Width: =174
+                X: =1180
+                ZIndex: =18
+
+            Label7_26 As label:
+                Align: =Align.Center
+                BorderThickness: =2
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: =TextInput1_2.Text * TextInput1_7.Text
+                Width: =121
+                X: =1492
+                ZIndex: =20
+
+            Label7_25 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =41
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =28
+                X: =1464
+                ZIndex: =21
+
+            ComboBox1_1 As combobox:
+                DisplayFields: =["SKU"]
+                InputTextPlaceholder: ="Find items"
+                Items: =Filter(Products, IsDeleted = false)
+                OnChange: =Set(varUnit, Filter(Products, Name = Dropdown2_1.Selected.Title, Unit.Value ))
+                OnSelect: =Select(Parent)
+                SearchFields: =["SKU"]
+                SearchItems: =Search(Filter(Products, IsDeleted = false),ComboBox1_1.SearchText,SKU)
+                SelectMultiple: =false
+                Width: =253
+                X: =31
+                ZIndex: =22
+
+        Label2_121 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Inventory ID"
+            Visible: =false
+            Width: =282
+            X: =368
+            Y: =112
+            ZIndex: =2
+
+        Label2_117 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Cost Price"
+            Width: =262
+            X: =466
+            Y: =108
+            ZIndex: =3
+
+        Label2_118 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Sale Price"
+            Width: =276
+            X: =823
+            Y: =108
+            ZIndex: =4
+
+        Label2_120 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Price per Unit"
+            Visible: =false
+            Width: =276
+            X: =1224
+            Y: =110
+            ZIndex: =6
+
+        Label2_119 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Total"
+            Width: =234.52
+            X: =1456
+            Y: =108
+            ZIndex: =7
+
+        Label2_95 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =50
+            Size: =22
+            Text: ="Create a Purchase Order"
+            Width: =419
+            X: =40
+            Y: =40
+            ZIndex: =8
+
+        Button5_3 As button:
+            BorderThickness: =0
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =Collect(PurchaseOrderCollection, {InventoryID: 0, ItemName: "", CostPrice: 0, RetailPrice: 0, Units: "", Quantity: 0, Total: 0})
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="+ New"
+            Width: =200
+            X: =1470
+            Y: =43
+            ZIndex: =9
+
+        Label2_122 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =38
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Qty"
+            Width: =194
+            X: =1196
+            Y: =114
+            ZIndex: =10
+
+        Button5_5 As button:
+            BorderThickness: =0
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =
+                Set(varNewPO, Patch(PurchaseOrder, Defaults(PurchaseOrder), {TotalPrice: Value(Label2_124.Text)}, {Invoice: UploadedImage1.Image}));
+                
+                // Iterate over items in Gallery6_1 to manage inventory
+                ForAll(
+                    Gallery6_6.AllItems,
+                    // Determine if an existing inventory matches the current item's ID and cost price
+                        With(
+                            {existingInventory: LookUp(Inventories, ProductID.Id = LookUp(Products, SKU = ComboBox1_1.Selected.SKU).ID && CostPrice = Int(TextInput1_2.Text))},
+                            // Check if existing inventory was found
+                            If(
+                                IsBlank(existingInventory),
+                                // Create new inventory item
+                                With(
+                                    {
+                                        newInventory: Patch(
+                                            Inventories,
+                                            Defaults(Inventories),
+                                            {
+                                                ProductID: 
+                                                {
+                                                    '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                    Id:  Int(LookUp(Products, SKU = ComboBox1_1.Selected.SKU).ID),
+                                                    Value: LookUp(Products, SKU = ComboBox1_1.Selected.SKU).Title
+                                                }, // Assuming ProductID expects the ID directly
+                                                CostPrice: Int(TextInput1_2.Text),
+                                                QuantityAvailable: Int(TextInput1_7.Text),
+                                                RetailPrice: Int(TextInput1_5.Text)
+                                                
+                                            }
+                                        )
+                                    },
+                                    // Use new inventory item's ID in PurchaseOrderDetail
+                                    Patch(
+                                        PurchaseOrderDetail,
+                                        Defaults(PurchaseOrderDetail),
+                                        {
+                                            PurchaseOrderID: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: varNewPO.ID,
+                                                Value: varNewPO.Title
+                                            },
+                                            Quantity: Int(TextInput1_7.Text),
+                                            UnitPrice: Int(TextInput1_2.Text),
+                                            InventoryID: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: Int(newInventory.ID),
+                                                Value:  newInventory.ID
+                                            }
+                                        }
+                                    )
+                                ),
+                                With(
+                                    {
+                                        updatedInventory: Patch(
+                                            Inventories,{
+                                                ID:existingInventory.ID
+                                            },
+                                            {QuantityAvailable: existingInventory.QuantityAvailable + Int(TextInput1_7.Text)}
+                                        )
+                                    },
+                                    Patch(
+                                        PurchaseOrderDetail,
+                                        Defaults(PurchaseOrderDetail),
+                                        {
+                                            PurchaseOrderID: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: varNewPO.ID,
+                                                Value: varNewPO.Title
+                                            },
+                                            Quantity: Int(TextInput1_7.Text),
+                                            InventoryID: {
+                                                '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                                                Id: Int(existingInventory.ID),
+                                                Value:  existingInventory.ID
+                                            }
+                                        }
+                                    )
+                                )
+                
+                            )
+                        )
+                );
+                Set(AttatchInv, false);
+                Refresh(Products);
+                Refresh(Inventories);
+                Refresh(PurchaseOrder);
+                Refresh(PurchaseOrderDetail);
+                Refresh(SalesOrder);
+                Refresh(SalesOrderDetail);
+                Refresh(Roles);
+                UpdateContext({showScreen5_2 : false})
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Create"
+            Width: =200
+            X: =1464
+            Y: =742
+            ZIndex: =11
+
+        Label2_123 As label:
+            Align: =Align.Right
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: |-
+                ="Total Price:
+                "
+            Width: =276
+            X: =1311
+            Y: =674
+            ZIndex: =12
+
+        Label2_124 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: =Sum(Gallery6_6.AllItems,Int(Label7_26.Text))
+            Width: =136
+            X: =1587
+            Y: =674
+            ZIndex: =13
+
+        Button5_12 As button:
+            BorderThickness: =0
+            Fill: =RGBA(224, 224, 224, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =UpdateContext({showScreen5_2: false});
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Cancel"
+            Width: =200
+            X: =62
+            Y: =742
+            ZIndex: =14
+
+        UploadedImage1 As image:
+            Height: =169
+            Image: =If(IsBlank(AddMediaButton1.Media), SampleImage, AddMediaButton1.Media)
+            Visible: =If(AttatchInv, true, false)
+            Width: =218
+            X: =1138
+            Y: =609
+            ZIndex: =17
+
+        AddMediaButton1 As addMedia:
+            ChangePictureText: ="Change Invoice"
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(109, 49, 162, 1)
+            Height: =36
+            OnChange: =Set(AttatchInv, true);
+            OnSelect: =Set(AttatchInv, true);
+            Padding: =5
+            Size: =15
+            Text: ="Attatch Invoice"
+            UseMobileCamera: =true
+            Width: =225
+            X: =894
+            Y: =746
+            ZIndex: =18
+
+    Container6_30 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: |
+            =If(Container1.Visible, RGBA(0, 0, 0, 0.8), RGBA(0, 0, 0, 1))
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =If(Container6_29.Visible || Container6_32.Visible, true, false)
+        Width: =1297
+        ZIndex: =6
+
+        Image7 As image:
+            Height: =1000
+            Image: |-
+                =LookUp(
+                            PurchaseOrder, 
+                            ID = varNewPO.ID
+                        ).Invoice
+            Visible: =ViewInvoice
+            Width: =1297
+            ZIndex: =1
+
+    Container6_29 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =orderVisible
+        Width: =852
+        X: =1297
+        ZIndex: =7
+
+        Icon1_11 As icon.Trash:
+            Color: =RGBA(106, 108, 125, 1)
+            Height: =52
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({orderVisible : false});
+            Width: =55
+            X: =775
+            Y: =43
+            ZIndex: =2
+
+        Label2_132 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =46
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =32
+            Text: ="Order Items"
+            Width: =309
+            X: =45
+            Y: =49
+            ZIndex: =4
+
+        Gallery6_8 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =735
+            Items: =SalesOrderItems
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =150
+            Transition: =""
+            Visible: =false
+            Width: =968
+            Y: =148
+            ZIndex: =17
+
+            Button6_11 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =146
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =885
+                ZIndex: =1
+
+            Icon1_12 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =19
+                Icon: =Icon.Trash
+                OnSelect: =Remove(SalesOrderItems, ThisItem)
+                Width: =20
+                X: =900
+                Y: =59
+                ZIndex: =9
+
+            Label7_33 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =28
+                X: =733
+                Y: =56
+                ZIndex: =16
+
+            TextInput1_10 As text:
+                Align: =Align.Center
+                BorderColor: =If(Int(ThisItem.Quantity) < 0, Color.Red, Parent.BorderColor)
+                Color: =RGBA(106, 108, 125, 1)
+                Default: =ThisItem.Quantity
+                FontWeight: =FontWeight.Bold
+                Format: =TextFormat.Number
+                Height: =30
+                OnChange: =
+                OnSelect: =Select(Parent)
+                Width: =54
+                X: =622
+                Y: =58
+                ZIndex: =18
+
+            Label7_36 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                Height: =36
+                OnSelect: =Select(Parent)
+                Text: =Label7_34.Text * TextInput1_10.Text
+                Width: =100
+                X: =745
+                Y: =53
+                ZIndex: =20
+
+            Label7_35 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =22
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =20
+                X: =438
+                Y: =62
+                ZIndex: =21
+
+            Label7_34 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledBorderColor: =RGBA(0, 18, 107, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                Height: =44
+                OnSelect: =Select(Parent)
+                Text: |
+                    =LookUp(
+                        Inventories,
+                        ID = ThisItem.InventoryID).RetailPrice
+                Width: =121
+                X: =432
+                Y: =52
+                ZIndex: =25
+
+            Label7_32 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =47
+                OnSelect: =Select(Parent)
+                Text: =LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.InventoryID).ProductID.Id).Name
+                Width: =169
+                X: =212
+                Y: =51
+                ZIndex: =26
+
+            Label13_2 As label:
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.InventoryID
+                Visible: =false
+                X: =340
+                Y: =1
+                ZIndex: =27
+
+            Image1_4 As image:
+                Height: =102
+                Image: |+
+                    =//'122ca513dbba147e14944c5bb6276717'
+                    First(LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.InventoryID).ProductID.Id).Attachments).Value
+                    
+                Width: =143
+                X: =15
+                Y: =24
+                ZIndex: =28
+
+            Icon5_1 As icon.HorizontalLine:
+                Color: =RGBA(214, 221, 224, 1)
+                Fill: =RGBA(214, 221, 224, 1)
+                FocusedBorderThickness: =1
+                Height: =8
+                Icon: =Icon.HorizontalLine
+                OnSelect: =Select(Parent)
+                Width: =905
+                X: =15
+                Y: =134
+                ZIndex: =29
+
+        Label10_34 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Product Name"
+            Visible: =false
+            Width: =137
+            X: =241
+            Y: =122
+            ZIndex: =18
+
+        Label10_35 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Price"
+            Visible: =false
+            Width: =92
+            X: =464
+            Y: =122
+            ZIndex: =19
+
+        Label10_36 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Qty"
+            Visible: =false
+            Width: =43
+            X: =644
+            Y: =122
+            ZIndex: =20
+
+        Label10_37 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Total"
+            Visible: =false
+            Width: =73
+            X: =774
+            Y: =122
+            ZIndex: =21
+
+        Button5_14 As button:
+            BorderThickness: =0
+            DisplayMode: |
+                =If(
+                    CountRows(
+                        Filter(
+                            Gallery3_2.AllItems, 
+                            Int(Label7_6.Text) < 0
+                        )
+                    ) > 0, 
+                    DisplayMode.Disabled, 
+                    DisplayMode.Edit
+                )
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =Set(varNewSO, Patch(SalesOrder, Defaults(SalesOrder), {TotalPrice: Int(Label2_133.Text)}));
+                ForAll(Gallery6_2.AllItems, 
+                    Patch(SalesOrderDetail, Defaults(SalesOrderDetail), {
+                        SalesOrderID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: varNewSO.ID,
+                            Value: varNewSO.Title
+                        },
+                        UnitPrice: Int(Label7_10.Text),
+                        Quantity: Int(TextInput1_6.Text),
+                        InventoryID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: Int(Label13.Text),
+                            Value: Label13.Text
+                        }
+                    })
+                );
+                
+                ForAll(
+                    Gallery6_2.AllItems,
+                    With(
+                        {currentInventory: LookUp(Inventories, ID = Int(Label13.Text))},
+                        Patch(
+                            Inventories,
+                            currentInventory,
+                            {
+                                QuantityAvailable: currentInventory.QuantityAvailable - Int(TextInput1_6.Text)
+                            }
+                        )
+                    )
+                );
+                Set(varSalesOrderDetails, Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID));
+                Clear(SalesOrderItems);
+                Navigate(Screen5_4);
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Create"
+            Visible: =false
+            Width: =200
+            X: =610
+            Y: =907
+            ZIndex: =22
+
+        Gallery1_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Fill: =RGBA(250, 247, 255, 1)
+            Height: =551
+            Items: |
+                =If(
+                    Not(IsBlank(varNewSO)),
+                    Distinct(
+                        Filter(
+                            SalesOrderDetail, 
+                            SalesOrderID.Id = varNewSO.ID
+                        ), 
+                        LookUp(Inventories, ID = InventoryID.Id).ProductID
+                    ),
+                    Blank()
+                )
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: |
+                =300
+            Width: =790
+            X: =60
+            Y: =189
+            ZIndex: =25
+
+            Container12_1 As groupContainer.manualLayoutContainer:
+                BorderThickness: =2
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =68
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =554
+                X: =40
+                Y: =40
+                ZIndex: =1
+
+                Label8_1 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =68
+                    PaddingLeft: =30
+                    Size: =16
+                    Text: |+
+                        =//LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.Value.Id).ProductID.Id).SKU
+                        LookUp(Products, ID = ThisItem.Value.Id).SKU
+                        
+                    Width: =470
+                    X: =9
+                    ZIndex: =1
+
+            Label9_3 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="ID"
+                X: =40
+                Y: =124
+                ZIndex: =2
+
+            Label9_4 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="Quantity"
+                X: =242
+                Y: =124
+                ZIndex: =3
+
+            Label9_5 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="Price $"
+                X: =444
+                Y: =124
+                ZIndex: =4
+
+            Gallery7_1 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
+                DelayItemLoading: =true
+                Height: =109
+                Items: |
+                    =//Filter(SalesOrderDetail, InventoryID.Id = LookUp(Inventories, ID = ThisItem.Value.Id).ID)
+                    //Filter(Inventories,ID = Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID)
+                    //varSalesOrderDetails
+                    //Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID && LookUp(
+                    If(
+                        Not(IsBlank(varNewSO)),
+                        Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID && LookUp(
+                                Inventories, 
+                                ID = InventoryID.Id
+                            //).ProductID.Id = LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.Value.Id).ProductID.Id).ID
+                            ).ProductID.Id = LookUp(Products, ID = ThisItem.Value.Id).ID
+                        ),
+                        Blank())
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+                Width: =780
+                Y: =150
+                ZIndex: =5
+
+                Label11_3 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =Value(ThisItem.InventoryID.Id)
+                    X: =35
+                    Y: =9
+                    ZIndex: =1
+
+                Label11_4 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =ThisItem.Quantity
+                    X: =237
+                    Y: =9
+                    ZIndex: =2
+
+                Label11_5 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =ThisItem.UnitPrice
+                    X: =444
+                    Y: =9
+                    ZIndex: =3
+
+            Icon5_2 As icon.HorizontalLine:
+                Color: =RGBA(214, 221, 224, 1)
+                Fill: =RGBA(214, 221, 224, 1)
+                FocusedBorderThickness: =1
+                Height: =8
+                Icon: =Icon.HorizontalLine
+                OnSelect: =Select(Parent)
+                Width: =740
+                Y: =287
+                ZIndex: =6
+
+        Label2_137 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =50
+            Size: =22
+            Text: |-
+                ="Total:"
+            Visible: =!IsBlank(varNewSO)
+            Width: =273.05
+            X: =98
+            Y: =903
+            ZIndex: =26
+
+        Label2_138 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =22
+            Text: =varNewSO.TotalPrice
+            Width: =165
+            X: =544
+            Y: =903
+            ZIndex: =27
+
+    Container6_32 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =POVisible
+        Width: =852
+        X: =1298
+        ZIndex: =8
+
+        Icon1_13 As icon.Trash:
+            Color: =RGBA(106, 108, 125, 1)
+            Height: =52
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({POVisible : false});
+                Set(ViewInvoice, false);
+            Width: =55
+            X: =775
+            Y: =43
+            ZIndex: =2
+
+        Label2_133 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =46
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =32
+            Text: ="Order Items"
+            Width: =309
+            X: =45
+            Y: =49
+            ZIndex: =4
+
+        Label10_24 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Cost Price"
+            Visible: =If(IsEmpty(colFilInv) || varRole = "Consumer",false,true)
+            Width: =128
+            X: =250
+            Y: =635
+            ZIndex: =13
+
+        Label10_38 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Product Name"
+            Visible: =false
+            Width: =137
+            X: =241
+            Y: =122
+            ZIndex: =18
+
+        Label10_39 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Price"
+            Visible: =false
+            Width: =92
+            X: =464
+            Y: =122
+            ZIndex: =19
+
+        Label10_40 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Qty"
+            Visible: =false
+            Width: =43
+            X: =644
+            Y: =122
+            ZIndex: =20
+
+        Label10_41 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Total"
+            Visible: =false
+            Width: =73
+            X: =774
+            Y: =122
+            ZIndex: =21
+
+        Button5_15 As button:
+            BorderThickness: =0
+            DisplayMode: |
+                =If(
+                    CountRows(
+                        Filter(
+                            Gallery3_2.AllItems, 
+                            Int(Label7_6.Text) < 0
+                        )
+                    ) > 0, 
+                    DisplayMode.Disabled, 
+                    DisplayMode.Edit
+                )
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =Set(varNewSO, Patch(SalesOrder, Defaults(SalesOrder), {TotalPrice: Int(Label2_133.Text)}));
+                ForAll(Gallery6_2.AllItems, 
+                    Patch(SalesOrderDetail, Defaults(SalesOrderDetail), {
+                        SalesOrderID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: varNewSO.ID,
+                            Value: varNewSO.Title
+                        },
+                        UnitPrice: Int(Label7_10.Text),
+                        Quantity: Int(TextInput1_6.Text),
+                        InventoryID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: Int(Label13.Text),
+                            Value: Label13.Text
+                        }
+                    })
+                );
+                
+                ForAll(
+                    Gallery6_2.AllItems,
+                    With(
+                        {currentInventory: LookUp(Inventories, ID = Int(Label13.Text))},
+                        Patch(
+                            Inventories,
+                            currentInventory,
+                            {
+                                QuantityAvailable: currentInventory.QuantityAvailable - Int(TextInput1_6.Text)
+                            }
+                        )
+                    )
+                );
+                Set(varSalesOrderDetails, Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID));
+                Clear(SalesOrderItems);
+                Navigate(Screen5_4);
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Create"
+            Visible: =false
+            Width: =200
+            X: =610
+            Y: =907
+            ZIndex: =22
+
+        Gallery1_2 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Fill: =RGBA(250, 247, 255, 1)
+            Height: =513
+            Items: |
+                =If(
+                    Not(IsBlank(varNewPO)),
+                    Distinct(
+                        Filter(
+                            PurchaseOrderDetail, 
+                            PurchaseOrderID.Id = varNewPO.ID
+                        ), 
+                        LookUp(Inventories, ID = InventoryID.Id).ProductID
+                    ),
+                    Blank()
+                )
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: |
+                =300
+            Width: =790
+            X: =60
+            Y: =189
+            ZIndex: =25
+
+            Container12_2 As groupContainer.manualLayoutContainer:
+                BorderThickness: =2
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =68
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =554
+                X: =40
+                Y: =40
+                ZIndex: =1
+
+                Label8_2 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =68
+                    PaddingLeft: =30
+                    Size: =16
+                    Text: |+
+                        =//LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.Value.Id).ProductID.Id).SKU
+                        LookUp(Products, ID = ThisItem.Value.Id).SKU
+                        
+                    Width: =470
+                    X: =9
+                    ZIndex: =1
+
+            Label9_6 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="ID"
+                X: =40
+                Y: =124
+                ZIndex: =2
+
+            Label9_7 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="Quantity"
+                X: =242
+                Y: =124
+                ZIndex: =3
+
+            Label9_8 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Bold
+                OnSelect: =Select(Parent)
+                Text: ="Price $"
+                X: =444
+                Y: =124
+                ZIndex: =4
+
+            Gallery7_2 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
+                DelayItemLoading: =true
+                Height: =109
+                Items: |
+                    =//Filter(SalesOrderDetail, InventoryID.Id = LookUp(Inventories, ID = ThisItem.Value.Id).ID)
+                    //Filter(Inventories,ID = Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID)
+                    //varSalesOrderDetails
+                    //Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID && LookUp(
+                    If(
+                        Not(IsBlank(varNewPO)),
+                        Filter(PurchaseOrderDetail, PurchaseOrderID.Id = varNewPO.ID && LookUp(
+                                Inventories, 
+                                ID = InventoryID.Id
+                            //).ProductID.Id = LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.Value.Id).ProductID.Id).ID
+                            ).ProductID.Id = LookUp(Products, ID = ThisItem.Value.Id).ID
+                        ),
+                        Blank())
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+                Width: =780
+                Y: =150
+                ZIndex: =5
+
+                Label11_6 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =Value(ThisItem.InventoryID.Id)
+                    X: =35
+                    Y: =9
+                    ZIndex: =1
+
+                Label11_7 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =ThisItem.Quantity
+                    X: =237
+                    Y: =9
+                    ZIndex: =2
+
+                Label11_8 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =Select(Parent)
+                    Text: =ThisItem.UnitPrice
+                    X: =444
+                    Y: =9
+                    ZIndex: =3
+
+            Icon5_4 As icon.HorizontalLine:
+                Color: =RGBA(214, 221, 224, 1)
+                Fill: =RGBA(214, 221, 224, 1)
+                FocusedBorderThickness: =1
+                Height: =8
+                Icon: =Icon.HorizontalLine
+                OnSelect: =Select(Parent)
+                Width: =740
+                Y: =287
+                ZIndex: =6
+
+        Label2_140 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =50
+            Size: =22
+            Text: |-
+                ="Total:"
+            Visible: =!IsBlank(varNewSO)
+            Width: =273.05
+            X: =98
+            Y: =903
+            ZIndex: =26
+
+        Label2_141 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =22
+            Text: =varNewSO.TotalPrice
+            Width: =165
+            X: =544
+            Y: =903
+            ZIndex: =27
+
+        Label14 As label:
+            Align: =Align.Center
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =97
+            Size: =25
+            Text: =If(!ViewInvoice,"View Invoice", "Hide Invoice")
+            Underline: =true
+            Visible: =If(!IsBlank(Image7.Image), true, false)
+            Width: =306
+            X: =250
+            Y: =729
+            ZIndex: =28
+
+        Button14 As button:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =47
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(ViewInvoice, !ViewInvoice)
+            Text: =""
+            Visible: =If(!IsBlank(Image7.Image), true, false)
+            Width: =252
+            X: =274
+            Y: =757
+            ZIndex: =29
+

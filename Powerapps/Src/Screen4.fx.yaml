@@ -1,0 +1,22 @@
+Screen4 As screen:
+
+    ButtonCanvas1 As Button:
+        BasePaletteColor: =
+        DisplayMode: =DisplayMode.Edit
+        FontColor: =
+        Height: =215
+        Width: =636
+        X: =0
+        Y: =0
+        ZIndex: =1
+
+    ButtonCanvas1_1 As Button:
+        BasePaletteColor: =
+        DisplayMode: =DisplayMode.Edit
+        FontColor: =
+        Height: =215
+        Width: =636
+        X: =1023
+        Y: =215
+        ZIndex: =2
+

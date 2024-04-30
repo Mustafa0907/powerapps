@@ -1,0 +1,636 @@
+Screen5_6 As screen:
+
+    Container6_38 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =1740
+        X: =395
+        Y: =150
+        ZIndex: =1
+
+        Gallery6_10 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =685
+            Items: =Roles
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: |
+                =150
+            Transition: =Transition.Pop
+            Width: =1732
+            X: =8
+            Y: =165
+            ZIndex: =1
+
+            Button6_15 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =134
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1684
+                X: =2
+                ZIndex: =1
+
+            Label2_154 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: |-
+                    =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                    ClearCollect(colFilInv, Filter(Inventories, ProductID.Id = SelectedGalleryItem.ID, QuantityAvailable <> 0));
+                    If(ImageValue = "", UpdateContext({ ImageValue: First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value}),
+                    UpdateContext({ ImageValue: ""}));
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Title
+                Width: =235
+                X: =201
+                Y: =50
+                ZIndex: =2
+
+            Button6_16 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                Fill: =RGBA(255, 255, 255, 0)
+                Height: =133
+                HoverFill: =
+                OnSelect: |-
+                    =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                    ClearCollect(colFilInv, Filter(Inventories, ProductID.Id = SelectedGalleryItem.ID, QuantityAvailable <> 0));
+                    If(ImageValue = "", UpdateContext({ ImageValue: First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value}),
+                    UpdateContext({ ImageValue: ""}));
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1615
+                X: =2
+                Y: =1
+                ZIndex: =3
+
+            Icon1_17 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =50
+                Icon: =Icon.Trash
+                OnSelect: =Remove(Roles, ThisItem)
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true, false)
+                Width: =37
+                X: =1563
+                Y: =45
+                ZIndex: =4
+
+            ComboBox2 As combobox:
+                DefaultSelectedItems: =ThisItem.Role
+                DisplayFields: =["Value"]
+                DisplayMode: =If(varRole = "Admin",DisplayMode.Edit, DisplayMode.Disabled)
+                Items: =Choices(Roles.Role)
+                OnChange: |-
+                    =If(
+                        !IsBlank(ComboBox2.Selected), // Check if a selection is made
+                        Patch(
+                            Roles, // Data source to update
+                            LookUp(Roles, ID = ThisItem.ID), // Record to update, assuming 'RoleID' uniquely identifies a role
+                            {Role: ComboBox2.Selected}
+                        )
+                    )
+                OnSelect: =Select(Parent)
+                SearchFields: =["Value"]
+                SearchItems: =Choices(Roles.Role,ComboBox2.SearchText)
+                SelectMultiple: =false
+                X: =1062
+                Y: =50
+                ZIndex: =5
+
+            Image6 As image:
+                Height: =82
+                OnSelect: =Select(Parent)
+                Width: =86
+                X: =32
+                Y: =29
+                ZIndex: =6
+
+            Label2_155 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: |-
+                    =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                    ClearCollect(colFilInv, Filter(Inventories, ProductID.Id = SelectedGalleryItem.ID, QuantityAvailable <> 0));
+                    If(ImageValue = "", UpdateContext({ ImageValue: First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value}),
+                    UpdateContext({ ImageValue: ""}));
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Person.Email
+                Width: =395
+                X: =554
+                Y: =50
+                ZIndex: =7
+
+        Label2_67 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Name"
+            Width: =273
+            X: =202
+            Y: =108
+            ZIndex: =2
+
+        Label2_150 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Email"
+            Width: =276
+            X: =640
+            Y: =108
+            ZIndex: =5
+
+        Label2_152 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Role"
+            Width: =276
+            X: =1103
+            Y: =108
+            ZIndex: =7
+
+        Label2_153 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Actions"
+            Width: =234.52
+            X: =1488
+            Y: =108
+            ZIndex: =8
+
+        Label2_61 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =68
+            Size: =22
+            Text: ="User Management"
+            Width: =325
+            X: =40
+            Y: =40
+            ZIndex: =9
+
+        Button5_16 As button:
+            BorderThickness: =0
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |-
+                =NewForm(Form2);
+                UpdateContext({ selectedRecordID: 0,showModal: true })
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="+ New"
+            Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", true, false)
+            Width: =200
+            X: =1464
+            Y: =43
+            ZIndex: =10
+
+    Container6_35 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =112
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =2120
+        X: =15
+        Y: =20
+        ZIndex: =2
+
+        Label3_14 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =Parent.Height
+            Italic: =true
+            PaddingRight: =9.10
+            PaddingTop: =9.10
+            Size: =63.71
+            Text: ="ims"
+            Width: =228
+            ZIndex: =1
+
+        Label3_15 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =112
+            Italic: =true
+            PaddingRight: =9.10
+            Size: =63.71
+            Text: ="Inventory Management System"
+            Width: =1892
+            X: =228
+            ZIndex: =2
+
+        Label12_6 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Title
+            Width: =254
+            X: =1866
+            Y: =12
+            ZIndex: =3
+
+        Label12_7 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Role.Value
+            Width: =254
+            X: =1866
+            Y: =45
+            ZIndex: =4
+
+    Container6_37 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        RadiusBottomLeft: =10
+        RadiusBottomRight: =10
+        RadiusTopLeft: =10
+        RadiusTopRight: =10
+        Width: =350
+        X: =15
+        Y: =150
+        ZIndex: =3
+
+        Gallery8_6 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =740
+            Items: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2", Filter(SideBarGallery, Tab <> "Sale Orders"), If(varRole = "Consumer", Filter(SideBarGallery, Tab <> "Purchase Order"), SideBarGallery))
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =66
+            Width: =350
+            Y: =95
+            ZIndex: =2
+
+            Button3_23 As button:
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(109, 49, 162, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Normal
+                HoverColor: =ColorFade(Self.Fill, -20%)
+                HoverFill: =ColorFade(Self.Color, -20%)
+                OnSelect: |-
+                    =If(ThisItem.Tab = "Product Inventory", Navigate(Screen5));
+                    If(ThisItem.Tab = "Products", Navigate(Screen5));
+                    If(ThisItem.Tab = "Sale Orders", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "Cart", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "My Orders", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "Order Management", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "User Management", Navigate(Screen5_6));
+                    If(ThisItem.Tab = "My Approvals", Navigate(Screen5_8));
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18.21
+                Text: =ThisItem.Tab
+                Width: =339
+                X: =0.00
+                Y: =9
+                ZIndex: =3
+
+    Container13 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.54)
+        Height: =1000
+        Visible: =showModal
+        Width: =2148
+        X: =2
+        ZIndex: =4
+
+    Container11_1 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Bold
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =790
+        RadiusBottomLeft: =10
+        RadiusBottomRight: =10
+        RadiusTopLeft: =10
+        RadiusTopRight: =10
+        Visible: =showModal
+        Width: =548
+        X: =945
+        Y: =180
+        ZIndex: =5
+
+        Button7_1 As button:
+            BorderThickness: =5
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =736
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: =""
+            Width: =483
+            X: =35
+            Y: =24
+            ZIndex: =1
+
+        Label5_1 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =102
+            Size: =40
+            Text: ="Add a New User"
+            Width: =572
+            X: =60
+            Y: =64
+            ZIndex: =2
+
+        Button8_3 As button:
+            DisplayMode: |
+                =If(
+                    And(
+                        !IsBlank(DataCardValue5.Text), 
+                        !IsBlank(DataCardValue12.Selected.DisplayName),
+                        !IsBlank(DataCardValue13.Selected.Value)
+                    ), 
+                    DisplayMode.Edit, 
+                    DisplayMode.Disabled
+                )
+                
+                /*If(Form2.Valid, DisplayMode.Edit, 
+                    DisplayMode.Disabled)*/
+            Fill: =RGBA(109, 49, 162, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |
+                =SubmitForm(Form2);
+                ResetForm(Form2);
+                UpdateContext({selectedRecordID: 0,showModal:false})
+            Text: ="Submit"
+            X: =318
+            Y: =702
+            ZIndex: =10
+
+        Button8_2 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(242, 242, 242, 1)
+            HoverBorderColor: =ColorFade(Self.Fill, 20%)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =ResetForm(Form2);
+                UpdateContext({selectedRecordID: 0,showModal:false})
+            Text: ="Cancel"
+            X: =60
+            Y: =702
+            ZIndex: =11
+
+        Form2 As form:
+            DataSource: =Roles
+            NumberOfColumns: =1
+            Width: =468
+            X: =40
+            Y: =177
+            ZIndex: =12
+
+            Title_DataCard2 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Title"
+                Default: =ThisItem.Title
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Roles],DataSourceInfo.DisplayName,Title)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Roles], DataSourceInfo.MaxLength, Title)
+                Required: =true
+                Update: =DataCardValue5.Text
+                Width: =468
+                X: =0
+                Y: =0
+                ZIndex: =13
+
+                DataCardKey3 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue5 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =58
+                    ZIndex: =2
+
+                ErrorMessage3 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue5.Y + DataCardValue5.Height
+                    ZIndex: =3
+
+                StarVisible3 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey3.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey3.Y
+                    ZIndex: =4
+
+            Person_DataCard1 As typedDataCard.comboBoxEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Person"
+                Default: =ThisItem.Person
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Roles],DataSourceInfo.DisplayName,Person)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =true
+                Update: =DataCardValue12.Selected
+                Width: =468
+                X: =0
+                Y: =1
+                ZIndex: =13
+
+                DataCardKey6 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =28
+                    Y: =15
+                    ZIndex: =1
+
+                DataCardValue12 As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultSelectedItems: =Parent.Default
+                    DisplayFields: =["DisplayName","Email","Picture"]
+                    DisplayMode: =Parent.DisplayMode
+                    Items: =Choices([@Roles].Person)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: =Choices(Roles.Person,DataCardValue12.SearchText)
+                    SelectMultiple: =false
+                    Template: =ListItemTemplate.Person
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey6.Y + DataCardKey6.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage6 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue12.Y + DataCardValue12.Height
+                    ZIndex: =3
+
+                StarVisible6 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey6.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey6.Y
+                    ZIndex: =4
+
+            Role_DataCard1 As typedDataCard.comboBoxEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="role"
+                Default: =ThisItem.Role
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Roles],DataSourceInfo.DisplayName,Role)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =true
+                Update: =DataCardValue13.Selected
+                Width: =468
+                X: =0
+                Y: =2
+                ZIndex: =13
+
+                DataCardKey7 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue13 As combobox:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DefaultSelectedItems: =Parent.Default
+                    DisplayFields: =["Value"]
+                    DisplayMode: =Parent.DisplayMode
+                    Items: =Choices([@Roles].Role)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SearchFields: =["Value"]
+                    SearchItems: =Choices(Roles.Role,DataCardValue13.SearchText)
+                    SelectMultiple: =false
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage7 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue13.Y + DataCardValue13.Height
+                    ZIndex: =3
+
+                StarVisible7 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey7.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey7.Y
+                    ZIndex: =4
+

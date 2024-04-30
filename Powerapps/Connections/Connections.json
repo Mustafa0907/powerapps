@@ -1,0 +1,179 @@
+{
+  "13fcfc9d-9b86-436e-be0d-3dacf04610cb": {
+    "connectionRef": {
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1686/1.0.1686.3699/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "2850d961-7352-41ec-846b-2e3dd75063ee": {
+          "value": "shared_sharepointonline"
+        },
+        "workflowDisplayName": {
+          "value": "PIN_Decrypt"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "dd61080b-85a7-4ca9-a2d0-5122e86c9a2c"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "2850d961-7352-41ec-846b-2e3dd75063ee"
+        },
+        "workflowDisplayName": {
+          "value": "PIN_Decrypt"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "dd61080b-85a7-4ca9-a2d0-5122e86c9a2c"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "PIN_Decrypt"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "2850d961-7352-41ec-846b-2e3dd75063ee"
+    },
+    "dependents": [],
+    "id": "13fcfc9d-9b86-436e-be0d-3dacf04610cb"
+  },
+  "2850d961-7352-41ec-846b-2e3dd75063ee": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read",
+      "providers/PowerPlatform.Governance/Operations/Write",
+      "providers/PowerPlatform.Governance/Operations/Delete"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1685/1.0.1685.3700/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://khiibaedu.sharepoint.com/sites/CloudComputing-Spring-2024": {
+        "dataSources": {
+          "Auth": {
+            "tableName": "d8573eb9-cf6d-4c5f-8a76-5900fb20f7d8"
+          },
+          "Dump_Images": {
+            "tableName": "968ea498-d09d-46f4-8f7b-d96b1e054fa7"
+          },
+          "Inventories": {
+            "tableName": "411a9a8b-8ae7-43b6-aeeb-06cf76744df8"
+          },
+          "Products": {
+            "tableName": "d3944a2f-e8ad-458c-9d59-48cfa71b55a7"
+          },
+          "PurchaseOrder": {
+            "tableName": "1f5211a9-ce61-4864-96d6-8230d2406420"
+          },
+          "PurchaseOrderDetail": {
+            "tableName": "e1f287a2-29ca-4315-a98c-c2d745dd22e0"
+          },
+          "Roles": {
+            "tableName": "afc2c8e0-0779-49e5-add5-60feeb5aba91"
+          },
+          "SalesOrder": {
+            "tableName": "e77d686c-0b53-4d6b-8ff7-790ce7aa7be1"
+          },
+          "SalesOrderDetail": {
+            "tableName": "61c0d8a8-d72e-487a-bdaa-1322a795b02f"
+          }
+        }
+      },
+      "https://qordatainc.sharepoint.com/sites/InventoryManagement": {
+        "dataSources": {
+          "Images": {
+            "tableName": "50d98a6d-aa86-4780-a391-f83bf67dfc0c"
+          },
+          "Payment": {
+            "tableName": "8099256e-2d9e-43cc-8903-d016afa4f489"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Payment",
+      "Images",
+      "Products",
+      "Roles",
+      "Inventories",
+      "PurchaseOrder",
+      "PurchaseOrderDetail",
+      "SalesOrder",
+      "SalesOrderDetail",
+      "Dump_Images",
+      "Auth"
+    ],
+    "dependencies": {},
+    "dependents": [
+      "acf4130b-e0d3-4b3d-bd13-a6d0e8b6dbfb",
+      "13fcfc9d-9b86-436e-be0d-3dacf04610cb"
+    ],
+    "id": "2850d961-7352-41ec-846b-2e3dd75063ee"
+  },
+  "acf4130b-e0d3-4b3d-bd13-a6d0e8b6dbfb": {
+    "connectionRef": {
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1686/1.0.1686.3699/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "2850d961-7352-41ec-846b-2e3dd75063ee": {
+          "value": "shared_sharepointonline"
+        },
+        "workflowDisplayName": {
+          "value": "Encrypt_PIN"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "a915b1b3-034b-45c6-a6b0-3cf3a7bebf8d"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "2850d961-7352-41ec-846b-2e3dd75063ee"
+        },
+        "workflowDisplayName": {
+          "value": "Encrypt_PIN"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "a915b1b3-034b-45c6-a6b0-3cf3a7bebf8d"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "Encrypt_PIN"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "2850d961-7352-41ec-846b-2e3dd75063ee"
+    },
+    "dependents": [],
+    "id": "acf4130b-e0d3-4b3d-bd13-a6d0e8b6dbfb"
+  },
+  "fb81152e-1bd5-46ce-ae3a-129c7fd27fde": {
+    "appActions": [
+      "SendEmailV2"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 Outlook",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/office365/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365Outlook"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "fb81152e-1bd5-46ce-ae3a-129c7fd27fde"
+  }
+}

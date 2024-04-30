@@ -1,0 +1,2282 @@
+Screen5 As screen:
+
+    Container6_2 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =1740
+        X: =395
+        Y: =150
+        ZIndex: =1
+
+        Gallery6 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =685
+            Items: =Sort(Filter(Products, IsDeleted = false && Approval_Status = "Approved"), Created,SortOrder.Descending)
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =41
+            Transition: =Transition.Pop
+            Width: =1732
+            X: =8
+            Y: =165
+            ZIndex: =1
+
+            Button6 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1684
+                X: =2
+                ZIndex: =1
+
+            Label2_48 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: |-
+                    =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                    ClearCollect(colFilInv, Filter(Inventories, ProductID.Id = SelectedGalleryItem.ID, QuantityAvailable <> 0));
+                    If(ImageValue = "", UpdateContext({ ImageValue: First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value}),
+                    UpdateContext({ ImageValue: ""}));
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Title
+                Width: =235
+                X: =17
+                Y: =1
+                ZIndex: =2
+
+            Label2_47 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.SKU
+                Width: =232
+                X: =252
+                Y: =1
+                ZIndex: =3
+
+            Label2_46 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Category
+                Width: =234
+                X: =484
+                Y: =1
+                ZIndex: =4
+
+            Label2_45 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Subcategory
+                Width: =239
+                X: =718
+                Y: =1
+                ZIndex: =5
+
+            Label2_44 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Brand
+                Width: =234
+                X: =957
+                Y: =1
+                ZIndex: =6
+
+            Label2_43 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: =ThisItem.Manufacturer
+                Width: =230
+                X: =1191
+                Y: =1
+                ZIndex: =7
+
+            Label2_42 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Semibold
+                OnSelect: =Set(SelectedGalleryItem, ThisItem); Set(IsContainerVisible, true);
+                PaddingLeft: =10
+                PaddingRight: =9.10
+                Size: =15
+                Text: |
+                    =Concatenate(Left(ThisItem.Description, 10), "...")
+                Width: =234
+                X: =1421
+                Y: =1
+                ZIndex: =8
+
+            Icon1 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =19
+                Icon: =Icon.Trash
+                OnSelect: |-
+                    =Patch(Products, ThisItem, {IsDeleted: true})
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true, false)
+                Width: =20
+                X: =1655
+                Y: =10
+                ZIndex: =9
+
+            Icon1_1 As icon.Trash:
+                Height: =19
+                Icon: =Icon.Edit
+                OnSelect: |
+                    =UpdateContext({ selectedRecordID: ThisItem.ID, showModal: true });
+                    EditForm(Form1);
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true, false)
+                Width: =20
+                X: =1629
+                Y: =10
+                ZIndex: =10
+
+            Button6_4 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                Fill: =RGBA(255, 255, 255, 0)
+                HoverFill: =
+                OnSelect: |-
+                    =Set(SelectedGalleryItem, Gallery6.Selected); Set(IsContainerVisible, true);
+                    ClearCollect(colFilInv, Filter(Inventories, ProductID.Id = SelectedGalleryItem.ID, QuantityAvailable > 0 && IsDeleted = false));
+                    If(ImageValue = "", UpdateContext({ ImageValue: First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value}),
+                    UpdateContext({ ImageValue: ""}));
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =1615
+                X: =2
+                Y: =1
+                ZIndex: =11
+
+        Label2_35 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Item Name"
+            Width: =273
+            X: =40
+            Y: =108
+            ZIndex: =2
+
+        Label2_36 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="SKU"
+            Width: =282
+            X: =254
+            Y: =108
+            ZIndex: =3
+
+        Label2_37 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Category"
+            Width: =262
+            X: =495
+            Y: =108
+            ZIndex: =4
+
+        Label2_38 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Sub-Category"
+            Width: =276
+            X: =743
+            Y: =108
+            ZIndex: =5
+
+        Label2_39 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Brand"
+            Width: =272
+            X: =978
+            Y: =108
+            ZIndex: =6
+
+        Label2_40 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Manufacturer"
+            Width: =276
+            X: =1212
+            Y: =108
+            ZIndex: =7
+
+        Label2_41 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Description"
+            Width: =234.52
+            X: =1447
+            Y: =108
+            ZIndex: =8
+
+        Label2_34 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =50
+            Size: =22
+            Text: ="Products"
+            Width: =273.05
+            X: =40
+            Y: =40
+            ZIndex: =9
+
+        Button5 As button:
+            BorderThickness: =0
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |
+                =If(Authenticated,
+                    NewForm(Form1);
+                    UpdateContext({ selectedRecordID: 0,showModal: true });,
+                    Set(Container2_Visible, true))
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="+ New"
+            Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", true, false)
+            Width: =200
+            X: =1464
+            Y: =43
+            ZIndex: =10
+
+        Icon4 As icon.ShoppingCart:
+            Height: =41
+            Icon: =Icon.ShoppingCart
+            OnSelect: |-
+                =UpdateContext({cartVisible : true})
+            Visible: =If(varRole = "Admin" || varRole = "Consumer",true, false)
+            Width: =44
+            X: =If(varRole = "Admin",1403,1542)
+            Y: =44
+            ZIndex: =11
+
+        Button11 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(184, 0, 0, 1)
+            Height: =20
+            Size: =10
+            Text: =CountRows(SalesOrderItems)
+            Visible: =If(varRole = "Admin" || varRole = "Consumer",true, false)
+            Width: =20
+            X: =If(varRole = "Admin",1403,1570)
+            Y: =41
+            ZIndex: =12
+
+        Button5_22 As button:
+            BorderThickness: =0
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            HoverColor: =RGBA(109, 49, 162, 1)
+            HoverFill: =RGBA(250, 247, 255, 1)
+            OnSelect: =Set(Container1_Visible, true)
+            PressedFill: =Self.Fill
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Create Pin"
+            Visible: =!checkAuth
+            Width: =200
+            X: =1111
+            Y: =41
+            ZIndex: =13
+
+    Container6_1 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =350
+        X: =15
+        Y: =150
+        ZIndex: =2
+
+        "Sidebar_5 As 'Admin Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToPo: =Screen5_1
+            NavigateToProducts: =Screen5
+            NavigateToSo: =Screen5_2
+            ZIndex: =6
+
+        "'Consumer Sidebar_1' As 'Consumer Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToProducts: =Screen5
+            NavigateToSo: =Screen5_2
+            Visible: =If(varRole = "Consumer", true, false)
+            ZIndex: =7
+
+        "'IM Sidebar_1' As 'IM Sidebar'":
+            NavigateToOh: =Screen5_5
+            NavigateToPo: =Screen5_1
+            NavigateToProducts: =Screen5
+            Visible: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2", true, false)
+            ZIndex: =8
+
+    Container6 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =112
+        PaddingLeft: =15
+        PaddingRight: =15
+        Width: =2120
+        X: =15
+        Y: =20
+        ZIndex: =3
+
+        Label3_2 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =Parent.Height
+            Italic: =true
+            PaddingRight: =9.10
+            PaddingTop: =9.10
+            Size: =63.71
+            Text: ="ims"
+            Width: =228
+            ZIndex: =1
+
+        Label3_3 As label:
+            Align: =Align.Center
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(109, 49, 162, 1)
+            Fill: =RGBA(250, 247, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =112
+            Italic: =true
+            PaddingRight: =9.10
+            Size: =63.71
+            Text: ="Inventory Management System"
+            Width: =1892
+            X: =228
+            ZIndex: =2
+
+        Label12 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Title
+            Width: =254
+            X: =1866
+            Y: =12
+            ZIndex: =3
+
+        Label12_1 As label:
+            Color: =RGBA(109, 49, 162, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =48
+            Size: =17
+            Text: =LookUp(Roles, Person.Email = User().Email).Role.Value
+            Width: =254
+            X: =1866
+            Y: =45
+            ZIndex: =4
+
+    Container11 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.Bold
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =967
+        RadiusBottomLeft: =10
+        RadiusBottomRight: =10
+        RadiusTopLeft: =10
+        RadiusTopRight: =10
+        Visible: =showModal
+        Width: =1594
+        X: =412
+        Y: =32
+        ZIndex: =4
+
+        Button7 As button:
+            BorderThickness: =5
+            DisabledFill: =RGBA(0, 0, 0, 0)
+            DisplayMode: =DisplayMode.Disabled
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =915
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Text: =""
+            Width: =1562
+            X: =15
+            Y: =18
+            ZIndex: =1
+
+        Label5 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =102
+            Size: =40
+            Text: =If(selectedRecordID = 0, "Add a New Product", "Edit a Product")
+            Width: =572
+            X: =50
+            Y: =24
+            ZIndex: =2
+
+        Form1 As form:
+            DataSource: =Products
+            DefaultMode: =If(selectedRecordID = 0, FormMode.New, FormMode.Edit)
+            Height: =787
+            Item: =LookUp(Products, ID = selectedRecordID)
+            Width: =1541
+            X: =13
+            Y: =111
+            ZIndex: =9
+
+            SKU_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="SKU"
+                Default: =LookUp(Products, ID = selectedRecordID).SKU
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,SKU)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, SKU)
+                Required: =true
+                Update: =DataCardValue3.Text
+                Width: =513
+                X: =1
+                Y: =0
+                ZIndex: =1
+
+                DataCardKey5 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue3 As text:
+                    BorderColor: =If(IsBlank(DataCardValue3.Text), Color.Red, Parent.BorderColor)
+                    Default: =LookUp(Products, ID = selectedRecordID).SKU
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage5 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue3.Y + DataCardValue3.Height
+                    ZIndex: =3
+
+                StarVisible5 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey5.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey5.Y
+                    ZIndex: =4
+
+            Longitude_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Longitude"
+                Default: =ThisItem.Longitude
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Longitude)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Longitude)
+                Required: =false
+                Update: =DataCardValue14.Text
+                Visible: =false
+                Width: =513
+                X: =1
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey14 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue14 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Location.Longitude
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey14.Y + DataCardKey14.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage14 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue14.Y + DataCardValue14.Height
+                    ZIndex: =3
+
+                StarVisible14 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey14.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey14.Y
+                    ZIndex: =4
+
+            Latitude_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Latitude"
+                Default: =ThisItem.Latitude
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Latitude)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Latitude)
+                Required: =false
+                Update: =DataCardValue15.Text
+                Visible: =false
+                Width: =513
+                X: =2
+                Y: =3
+                ZIndex: =1
+
+                DataCardKey15 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue15 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Location.Latitude
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey15.Y + DataCardKey15.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage15 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue15.Y + DataCardValue15.Height
+                    ZIndex: =3
+
+                StarVisible15 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey15.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey15.Y
+                    ZIndex: =4
+
+            Title_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Title"
+                Default: =LookUp(Products, ID = selectedRecordID).Title
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Title)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Title)
+                Required: =false
+                Update: =DataCardValue1.Text
+                Width: =513
+                X: =0
+                Y: =0
+                ZIndex: =10
+
+                DataCardKey1 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: ="Name"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue1 As text:
+                    BorderColor: =If(IsBlank(DataCardValue1.Text), Color.Red, Parent.BorderColor)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage1 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue1.Y + DataCardValue1.Height
+                    ZIndex: =3
+
+                StarVisible1 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey1.Height
+                    Text: ="*"
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey1.Y
+                    ZIndex: =4
+
+            Category_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Category"
+                Default: =LookUp(Products, ID = selectedRecordID).Category
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Category)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Category)
+                Required: =true
+                Update: =DataCardValue2.Text
+                Width: =513
+                X: =2
+                Y: =0
+                ZIndex: =10
+
+                DataCardKey2 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue2 As text:
+                    BorderColor: =If(IsBlank(DataCardValue2.Text), Color.Red, Parent.BorderColor)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage2 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue2.Y + DataCardValue2.Height
+                    ZIndex: =3
+
+                StarVisible2 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey2.Y
+                    ZIndex: =4
+
+            Unit_DataCard1 As typedDataCard.comboBoxEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Unit"
+                Default: =ThisItem.Unit
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Unit)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =true
+                Update: =DataCardValue6.Selected
+                Width: =513
+                X: =0
+                Y: =1
+                ZIndex: =10
+
+                DataCardKey8 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue6 As combobox:
+                    BorderColor: =If(IsBlank(DataCardValue6.SelectedItems), Color.Red, Parent.BorderColor)
+                    DefaultSelectedItems: =LookUp(Products, ID = selectedRecordID).Unit
+                    DisplayFields: =["Value"]
+                    DisplayMode: =Parent.DisplayMode
+                    Items: =Choices([@Products].Unit)
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    SearchFields: =["Value"]
+                    SearchItems: =Choices(Products.Unit,DataCardValue6.SearchText)
+                    SelectMultiple: =false
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey8.Y + DataCardKey8.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage8 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue6.Y + DataCardValue6.Height
+                    ZIndex: =3
+
+                StarVisible8 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey8.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey8.Y
+                    ZIndex: =4
+
+            Subcategory_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Subcategory"
+                Default: =ThisItem.Subcategory
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Subcategory)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Subcategory)
+                Required: =true
+                Update: =DataCardValue7.Text
+                Width: =513
+                X: =1
+                Y: =1
+                ZIndex: =10
+
+                DataCardKey9 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue7 As text:
+                    BorderColor: =If(IsBlank(DataCardValue7.Text), Color.Red, Parent.BorderColor)
+                    Default: =LookUp(Products, ID = selectedRecordID).Subcategory
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey9.Y + DataCardKey9.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage9 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue7.Y + DataCardValue7.Height
+                    ZIndex: =3
+
+                StarVisible9 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey9.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey9.Y
+                    ZIndex: =4
+
+            PackageSize_DataCard1 As typedDataCard.numberEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="PackageSize"
+                Default: =ThisItem.PackageSize
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,PackageSize)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                Required: =true
+                Update: =Value(DataCardValue8.Text)
+                Width: =513
+                X: =2
+                Y: =1
+                ZIndex: =10
+
+                DataCardKey10 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue8 As text:
+                    BorderColor: =If(IsBlank(DataCardValue8.Text), Color.Red, Parent.BorderColor)
+                    Default: =LookUp(Products, ID = selectedRecordID).PackageSize
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    Format: =TextFormat.Number
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey10.Y + DataCardKey10.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage10 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue8.Y + DataCardValue8.Height
+                    ZIndex: =3
+
+                StarVisible10 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey10.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey10.Y
+                    ZIndex: =4
+
+            Brand_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Brand"
+                Default: =ThisItem.Brand
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Brand)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =50
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Brand)
+                Required: =true
+                Update: =DataCardValue9.Text
+                Width: =513
+                X: =0
+                Y: =2
+                ZIndex: =10
+
+                DataCardKey11 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue9 As text:
+                    BorderColor: =If(IsBlank(DataCardValue9.Text), Color.Red, Parent.BorderColor)
+                    Default: =LookUp(Products, ID = selectedRecordID).Brand
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey11.Y + DataCardKey11.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage11 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue9.Y + DataCardValue9.Height
+                    ZIndex: =3
+
+                StarVisible11 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey11.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey11.Y
+                    ZIndex: =4
+
+            Manufacturer_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Manufacturer"
+                Default: =ThisItem.Manufacturer
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Manufacturer)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =190
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Manufacturer)
+                Required: =true
+                Update: =DataCardValue10.Text
+                Width: =513
+                X: =1
+                Y: =2
+                ZIndex: =10
+
+                DataCardKey12 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue10 As text:
+                    BorderColor: =If(IsBlank(DataCardValue10.Text), Color.Red, Parent.BorderColor)
+                    Default: =LookUp(Products, ID = selectedRecordID).Manufacturer
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey12.Y + DataCardKey12.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage12 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue10.Y + DataCardValue10.Height
+                    ZIndex: =3
+
+                StarVisible12 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey12.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey12.Y
+                    ZIndex: =4
+
+            Attachments_DataCard1 As typedDataCard.attachmentsEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="{Attachments}"
+                Default: =LookUp(Products, ID = selectedRecordID).Attachments
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Attachments)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =200
+                Required: =false
+                Update: =DataCardValue11.Attachments
+                Width: =513
+                X: =2
+                Y: =2
+                ZIndex: =10
+
+                DataCardKey13 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: ="Images"
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue11 As attachments:
+                    AddAttachmentText: ="Upload Image"
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =100
+                    IsInDataCard: =true
+                    Items: =Parent.Default
+                    PaddingBottom: =5
+                    PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                    PaddingRight: =5
+                    PaddingTop: =5
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey13.Y + DataCardKey13.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage13 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue11.Y + DataCardValue11.Height
+                    ZIndex: =3
+
+                StarVisible13 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey13.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey13.Y
+                    ZIndex: =4
+
+            Description_DataCard1 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Description"
+                Default: =ThisItem.Description
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@Products],DataSourceInfo.DisplayName,Description)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =298
+                MaxLength: =DataSourceInfo([@Products], DataSourceInfo.MaxLength, Description)
+                Required: =false
+                Update: =DataCardValue4.Text
+                Width: =513
+                X: =0
+                Y: =3
+                ZIndex: =10
+
+                DataCardKey4 As label:
+                    AutoHeight: =true
+                    Height: =34
+                    Text: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    Wrap: =false
+                    X: =30
+                    Y: =10
+                    ZIndex: =1
+
+                DataCardValue4 As text:
+                    BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =228
+                    MaxLength: =Parent.MaxLength
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Tooltip: =Parent.DisplayName
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                    ZIndex: =2
+
+                ErrorMessage4 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue4.Y + DataCardValue4.Height
+                    ZIndex: =3
+
+                StarVisible4 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey4.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey4.Y
+                    ZIndex: =4
+
+        Button8 As button:
+            DisplayMode: |
+                =/*If(
+                    And(
+                        !IsBlank(DataCardValue1.Text), 
+                        !IsBlank(DataCardValue2.Text),
+                        !IsBlank(DataCardValue3.Text), 
+                        !IsBlank(DataCardValue6.SelectedItems),
+                        !IsBlank(DataCardValue7.Text),
+                        !IsBlank(DataCardValue8.Text),
+                        !IsBlank(DataCardValue9.Text),
+                        !IsBlank(DataCardValue10.Text)
+                    ), 
+                    DisplayMode.Edit, 
+                    DisplayMode.Disabled
+                )*/
+                
+                If(Form1.Valid, DisplayMode.Edit, 
+                    DisplayMode.Disabled)
+            Fill: =RGBA(109, 49, 162, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |
+                =SubmitForm(Form1);
+                ResetForm(Form1);
+                UpdateContext({selectedRecordID: 0,showModal:false});
+                Office365Outlook.SendEmailV2(
+                    "m.mustafa.22206@khi.iba.edu.pk",
+                    "New Item added",
+                    "New Item added"
+                );
+            Text: ="Submit"
+            X: =1367
+            Y: =858
+            ZIndex: =10
+
+        Button8_1 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(242, 242, 242, 1)
+            HoverBorderColor: =ColorFade(Self.Fill, 20%)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =ResetForm(Form1);
+                UpdateContext({selectedRecordID: 0,showModal:false})
+            Text: ="Cancel"
+            X: =1134
+            Y: =858
+            ZIndex: =11
+
+    Container6_20 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =IsContainerVisible
+        Width: =968
+        X: =1182
+        ZIndex: =5
+
+        Label2_108 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =100
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =30
+            Text: =SelectedGalleryItem.SKU
+            Width: =402
+            X: =428
+            Y: =186
+            ZIndex: =1
+
+        Gallery3_2 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =236
+            Items: =Filter(colFilInv, IsDeleted = false)
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =90
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =915
+            X: =42
+            Y: =674
+            ZIndex: =1
+
+            Button6_7 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(245, 245, 245, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(180, 214, 250, 1)
+                Height: =43
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =599
+                X: =15
+                Y: =21
+                ZIndex: =1
+
+            Label10_15 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Text: |-
+                    =ThisItem.QuantityAvailable - Int(TextInput2.Text) - 
+                        If(
+                            IsBlank(LookUp(SalesOrderItems, InventoryID = ThisItem.ID)),
+                            0,
+                            LookUp(SalesOrderItems, InventoryID = ThisItem.ID).Quantity
+                        )
+                X: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", 15, 94)
+                Y: =22
+                ZIndex: =2
+
+            Label10_16 As label:
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Text: =ThisItem.CostPrice
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true,false)
+                Width: =114
+                X: =229
+                Y: =22
+                ZIndex: =3
+
+            Label10_17 As label:
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Text: ="$"
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true,false)
+                Width: =22
+                X: =215
+                Y: =22
+                ZIndex: =4
+
+            TextInput2 As text:
+                BorderColor: =If(Int(Label10_15.Text) < 0, Color.Red, Parent.BorderColor)
+                Default: =""
+                Format: =TextFormat.Number
+                Height: =42
+                OnSelect: =Select(Parent)
+                Visible: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2", false,true)
+                Width: =180
+                X: =550
+                Y: =22
+                ZIndex: =5
+
+            Label10_19 As label:
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Text: =ThisItem.RetailPrice
+                Width: =114
+                X: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", 396, 373)
+                Y: =22
+                ZIndex: =6
+
+            Label10_20 As label:
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Text: ="$"
+                Width: =22
+                X: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", 382, 358)
+                Y: =22
+                ZIndex: =7
+
+            Icon1_4 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =24
+                Icon: =Icon.Trash
+                OnSelect: |
+                    =Patch(Inventories, LookUp(Inventories, ID = ThisItem.ID), {IsDeleted: true});
+                    RemoveIf(colFilInv, ID = ThisItem.ID);
+                Visible: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",true, false)
+                Width: =26
+                X: =If(varRole = "Admin", 790, 562)
+                Y: =31
+                ZIndex: =8
+
+        Icon1_8 As icon.Trash:
+            Color: =RGBA(106, 108, 125, 1)
+            Height: =52
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =Set(IsContainerVisible, false);
+                UpdateContext({ ImageValue: ""});
+            Width: =55
+            X: =830
+            Y: =43
+            ZIndex: =2
+
+        Label2_107 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =46
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =32
+            Text: |-
+                ="Product Detail
+                "
+            Width: =375
+            X: =19
+            Y: =58
+            ZIndex: =4
+
+        Image1_2 As image:
+            Height: =311
+            Image: |+
+                =//'122ca513dbba147e14944c5bb6276717'
+                If(IsBlank(ImageValue), First(LookUp(Products, ID = SelectedGalleryItem.ID).Attachments).Value, ImageValue)
+                
+            Width: =386
+            X: =42
+            Y: =186
+            ZIndex: =5
+
+        Label2_109 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: =SelectedGalleryItem.Category
+            Width: =175
+            X: =437
+            Y: =286
+            ZIndex: =6
+
+        Label2_111 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: =SelectedGalleryItem.Subcategory
+            Width: =245
+            X: =592
+            Y: =286
+            ZIndex: =7
+
+        Label2_110 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =24
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =30
+            Text: ="-"
+            Width: =130
+            X: =528
+            Y: =286
+            ZIndex: =8
+
+        Label2_112 As label:
+            AutoHeight: =true
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =218
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: =SelectedGalleryItem.Description
+            Width: =355
+            X: =461
+            Y: =329
+            ZIndex: =9
+
+        Label10_13 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Available Qty"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =128
+            X: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", 75, 151)
+            Y: =635
+            ZIndex: =10
+
+        Label10_14 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Ordered Qty"
+            Visible: =If(IsEmpty(colFilInv) || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",false,true)
+            Width: =128
+            X: =621
+            Y: =635
+            ZIndex: =11
+
+        Button9_2 As button:
+            DisplayMode: |
+                =If(
+                    CountRows(
+                        Filter(
+                            Gallery3_2.AllItems, 
+                            Int(Label10_15.Text) < 0
+                        )
+                    ) > 0, 
+                    DisplayMode.Disabled, 
+                    DisplayMode.Edit
+                )
+            Height: =35
+            OnSelect: |
+                =ForAll(
+                    Gallery3_2.AllItems, 
+                    If(
+                        Value(TextInput2.Text) > 0, // Assuming TextInput2_1 is the correct control for quantity inside your gallery
+                        If(
+                            // Check if the item already exists in the collection
+                            IsBlank(LookUp(SalesOrderItems, InventoryID = ID)),
+                            // If not, add a new item
+                            Collect(SalesOrderItems, {InventoryID: ID, Quantity: Int(TextInput2.Text), ProductID: SelectedGalleryItem.ID}),
+                            // If yes, update the existing item's quantity
+                            Patch(
+                                SalesOrderItems, 
+                                LookUp(SalesOrderItems, InventoryID = ID),
+                                {Quantity: LookUp(SalesOrderItems, InventoryID = ID).Quantity + Int(TextInput2.Text)}
+                            )
+                        )
+                    )
+                );
+                Set(IsContainerVisible, false);
+            Text: ="Add"
+            Visible: =If(IsEmpty(colFilInv) || varRole = "Inventory Manager1" || varRole = "Inventory Manager2",false,true)
+            Width: =157
+            X: =621
+            Y: =943
+            ZIndex: =12
+
+        Label10_12 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Cost Price"
+            Visible: =If(IsEmpty(colFilInv) || varRole = "Consumer",false,true)
+            Width: =128
+            X: =250
+            Y: =635
+            ZIndex: =13
+
+        Gallery5 As gallery.galleryHorizontal:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =163
+            Items: =LookUp(Products, ID = SelectedGalleryItem.ID).Attachments
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =110
+            Width: =369
+            X: =31
+            Y: =472
+            ZIndex: =14
+
+            Image4 As image:
+                Image: =ThisItem.Value
+                OnSelect: |-
+                    =UpdateContext({ ImageValue: ThisItem.Value});
+                X: =6
+                Y: =53
+                ZIndex: =1
+
+        Label2_113 As label:
+            Align: =Align.Center
+            Color: =RGBA(233, 79, 76, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =176
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =25
+            Text: |-
+                ="*No Inventory Available for this Item
+                "
+            Visible: =If(IsEmpty(colFilInv),true,false)
+            Width: =669
+            X: =171
+            Y: =707
+            ZIndex: =15
+
+        Label10_18 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Sale Price"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =128
+            X: =If(varRole = "Admin" || varRole = "Inventory Manager1" || varRole = "Inventory Manager2", 421, 400)
+            Y: =635
+            ZIndex: =16
+
+    Container6_23 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =850
+        PaddingLeft: =15
+        PaddingRight: =15
+        RadiusBottomLeft: =10
+        RadiusBottomRight: =10
+        RadiusTopLeft: =10
+        RadiusTopRight: =10
+        Width: =350
+        X: =15
+        Y: =150
+        ZIndex: =6
+
+        Gallery8_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =740
+            Items: =If(varRole = "Inventory Manager1" || varRole = "Inventory Manager2" , Filter(SideBarGallery, Tab <> "Sale Orders"), If(varRole = "Consumer", Filter(SideBarGallery, Tab <> "Purchase Order"), SideBarGallery))
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =66
+            Width: =350
+            Y: =95
+            ZIndex: =2
+
+            Button3_18 As button:
+                BorderStyle: =BorderStyle.None
+                Color: =RGBA(109, 49, 162, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Normal
+                HoverColor: =ColorFade(Self.Fill, -20%)
+                HoverFill: =ColorFade(Self.Color, -20%)
+                OnSelect: |-
+                    =If(ThisItem.Tab = "Product Inventory", Navigate(Screen5));
+                    If(ThisItem.Tab = "Products", Navigate(Screen5));
+                    If(ThisItem.Tab = "Sale Orders", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "Cart", Navigate(Screen5_2));
+                    If(ThisItem.Tab = "My Orders", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "Order Management", Navigate(Screen5_5));
+                    If(ThisItem.Tab = "User Management", Navigate(Screen5_6));
+                    If(ThisItem.Tab = "My Approvals", Navigate(Screen5_8));
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18.21
+                Text: =ThisItem.Tab
+                Width: =339
+                X: =0.00
+                Y: =9
+                ZIndex: =3
+
+    Container6_21 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: |
+            =If(Container6_21.Visible, RGBA(0, 0, 0, 0.8), RGBA(0, 0, 0, 1))
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =If(Container6_20.Visible || Container6_28.Visible, true, false)
+        Width: =1182
+        ZIndex: =7
+
+    Container6_28 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =cartVisible
+        Width: =968
+        X: =1182
+        ZIndex: =8
+
+        Icon1_9 As icon.Trash:
+            Color: =RGBA(106, 108, 125, 1)
+            Height: =52
+            Icon: =Icon.Cancel
+            OnSelect: |-
+                =UpdateContext({cartVisible : false});
+                UpdateContext({ ImageValue: ""});
+            Width: =55
+            X: =830
+            Y: =43
+            ZIndex: =2
+
+        Label2_125 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =46
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =32
+            Text: ="Cart"
+            Width: =297
+            Y: =49
+            ZIndex: =4
+
+        Label10_22 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Cost Price"
+            Visible: =false
+            Width: =128
+            X: =250
+            Y: =635
+            ZIndex: =13
+
+        Label2_135 As label:
+            Align: =Align.Center
+            Color: =RGBA(233, 79, 76, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =176
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =25
+            Text: |-
+                ="*No Inventory Available for this Item
+                "
+            Visible: =If(IsEmpty(colFilInv),true,false)
+            Width: =669
+            X: =171
+            Y: =707
+            ZIndex: =15
+
+        Gallery6_7 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =735
+            Items: =SalesOrderItems
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =15
+            TemplateSize: =150
+            Transition: =""
+            Width: =968
+            Y: =148
+            ZIndex: =17
+
+            Button6_10 As button:
+                BorderThickness: =0
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                DisplayMode: =DisplayMode.Disabled
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =146
+                OnSelect: =Select(Parent)
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Text: =""
+                Width: =885
+                ZIndex: =1
+
+            Icon1_10 As icon.Trash:
+                Color: =RGBA(215, 58, 60, 1)
+                Height: =19
+                Icon: =Icon.Trash
+                OnSelect: =Remove(SalesOrderItems, ThisItem)
+                Width: =20
+                X: =900
+                Y: =59
+                ZIndex: =9
+
+            Label7_28 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =28
+                X: =733
+                Y: =56
+                ZIndex: =16
+
+            TextInput1_9 As text:
+                Align: =Align.Center
+                BorderColor: =If(Int(ThisItem.Quantity) < 0 || LookUp(Inventories, ID = ThisItem.InventoryID).QuantityAvailable - Int(TextInput1_9.Text) < 0, Color.Red, Parent.BorderColor)
+                Color: =RGBA(106, 108, 125, 1)
+                Default: =ThisItem.Quantity
+                FontWeight: =FontWeight.Bold
+                Format: =TextFormat.Number
+                Height: =30
+                OnChange: =
+                OnSelect: =Select(Parent)
+                Width: =54
+                X: =622
+                Y: =58
+                ZIndex: =18
+
+            Label7_31 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                Height: =36
+                OnSelect: =Select(Parent)
+                Text: =Label7_29.Text * TextInput1_9.Text
+                Width: =100
+                X: =745
+                Y: =53
+                ZIndex: =20
+
+            Label7_30 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =22
+                OnSelect: =Select(Parent)
+                Text: ="$"
+                Width: =20
+                X: =438
+                Y: =62
+                ZIndex: =21
+
+            Label7_29 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                DisabledBorderColor: =RGBA(0, 18, 107, 1)
+                DisabledColor: =RGBA(106, 108, 125, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FontWeight: =FontWeight.Bold
+                Height: =44
+                OnSelect: =Select(Parent)
+                Text: |
+                    =LookUp(
+                        Inventories,
+                        ID = ThisItem.InventoryID).RetailPrice
+                Width: =121
+                X: =432
+                Y: =52
+                ZIndex: =25
+
+            Label7_27 As label:
+                Align: =Align.Center
+                Color: =RGBA(106, 108, 125, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =47
+                OnSelect: =Select(Parent)
+                Text: =LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.InventoryID).ProductID.Id).Name
+                Width: =169
+                X: =212
+                Y: =51
+                ZIndex: =26
+
+            Label13_1 As label:
+                OnSelect: =Select(Parent)
+                Text: =ThisItem.InventoryID
+                Visible: |
+                    =false
+                X: =340
+                Y: =1
+                ZIndex: =27
+
+            Image1_3 As image:
+                Height: =102
+                Image: |+
+                    =//'122ca513dbba147e14944c5bb6276717'
+                    First(LookUp(Products, ID = LookUp(Inventories, ID = ThisItem.InventoryID).ProductID.Id).Attachments).Value
+                    
+                Width: =143
+                X: =15
+                Y: =24
+                ZIndex: =28
+
+            Icon5 As icon.HorizontalLine:
+                Color: =RGBA(214, 221, 224, 1)
+                Fill: =RGBA(214, 221, 224, 1)
+                FocusedBorderThickness: =1
+                Height: =8
+                Icon: =Icon.HorizontalLine
+                OnSelect: =Select(Parent)
+                Width: =905
+                X: =15
+                Y: =134
+                ZIndex: =29
+
+        Label10_30 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Product Name"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =137
+            X: =241
+            Y: =122
+            ZIndex: =18
+
+        Label10_31 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Price"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =92
+            X: =464
+            Y: =122
+            ZIndex: =19
+
+        Label10_32 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Qty"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =43
+            X: =644
+            Y: =122
+            ZIndex: =20
+
+        Label10_33 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =39
+            Text: ="Total"
+            Visible: =If(IsEmpty(colFilInv),false,true)
+            Width: =73
+            X: =774
+            Y: =122
+            ZIndex: =21
+
+        Button5_13 As button:
+            BorderThickness: =0
+            DisplayMode: |
+                =If(
+                    CountRows(
+                        Filter(
+                            Gallery3_2.AllItems, 
+                            TextInput1_9.BorderColor = Color.Red 
+                        )
+                    ) > 0, 
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit 
+                    
+                )
+            Fill: =RGBA(40, 134, 222, 1)
+            OnSelect: |
+                =/*Set(varNewSO, Patch(SalesOrder, Defaults(SalesOrder), {TotalPrice: Int(Label2_131.Text)}));
+                ForAll(Gallery6_7.AllItems, 
+                    Patch(SalesOrderDetail, Defaults(SalesOrderDetail), {
+                        SalesOrderID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: varNewSO.ID,
+                            Value: varNewSO.Title
+                        },
+                        UnitPrice: Int(Label7_29.Text),
+                        Quantity: Int(TextInput1_9.Text),
+                        InventoryID: {
+                            '@odata.type': "#Microsoft.Azure.Connectors.SharePoint.SPListExpandedReference",
+                            Id: Int(Label13_1.Text),
+                            Value: Label13_1.Text
+                        }
+                    })
+                );
+                
+                ForAll(
+                    Gallery6_7.AllItems,
+                    With(
+                        {currentInventory: LookUp(Inventories, ID = Int(Label13_1.Text))},
+                        Patch(
+                            Inventories,
+                            currentInventory,
+                            {
+                                QuantityAvailable: currentInventory.QuantityAvailable - Int(TextInput1_9.Text)
+                            }
+                        )
+                    )
+                );
+                Set(varSalesOrderDetails, Filter(SalesOrderDetail, SalesOrderID.Id = varNewSO.ID));
+                Clear(SalesOrderItems);*/
+                Navigate(Screen5_7);
+                UpdateContext({cartVisible : false});
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Text: ="Checkout"
+            Width: =200
+            X: =703
+            Y: =905
+            ZIndex: =22
+
+        Label2_130 As label:
+            Align: =Align.Right
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: |-
+                ="Total Price:
+                "
+            Width: =276
+            X: =250
+            Y: =905
+            ZIndex: =23
+
+        Label2_131 As label:
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: =Sum(Gallery6_7.AllItems, Label7_31.Text)
+            Width: =276
+            X: =526
+            Y: =905
+            ZIndex: =24
+
+    Container6_44 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Fill: |
+            =If(Container6_44.Visible, RGBA(0, 0, 0, 0.8), RGBA(0, 0, 0, 1))
+        Height: =1000
+        PaddingLeft: =15
+        PaddingRight: =15
+        Visible: =If(Container1.Visible || Container1_1.Visible, true, false)
+        Width: =2150
+        ZIndex: =9
+
+    Container1 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =234
+        Visible: =Container1_Visible
+        Width: =356
+        X: =1340
+        Y: =246
+        ZIndex: =10
+
+        TextInput5 As text:
+            Clear: =true
+            Default: ="Text input"
+            Format: =TextFormat.Number
+            MaxLength: =4
+            Mode: =TextMode.Password
+            X: =18
+            Y: =56
+            ZIndex: =1
+
+        Label2_171 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Enter Pin"
+            Width: =276
+            X: =40
+            Y: =16
+            ZIndex: =2
+
+        Button8_8 As button:
+            DisplayMode: |
+                =If(
+                    And(
+                        !IsBlank(TextInput5.Text) ), 
+                    DisplayMode.Edit, 
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(109, 49, 162, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =Encrypt_PIN.Run(User().Email,"New",Int(TextInput5.Text));
+                Set(Container1_Visible, false);
+                Set(checkAuth, true );
+            Text: ="Submit"
+            Width: =138
+            X: =200
+            Y: =167
+            ZIndex: =5
+
+        Button8_9 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(242, 242, 242, 1)
+            HoverBorderColor: =ColorFade(Self.Fill, 20%)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(Container1_Visible, false);
+            Text: ="Cancel"
+            Width: =138
+            X: =18
+            Y: =167
+            ZIndex: =6
+
+    Container1_1 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(250, 247, 255, 1)
+        Height: =234
+        Visible: =Container2_Visible
+        Width: =356
+        X: =1340
+        Y: =246
+        ZIndex: =11
+
+        TextInput5_1 As text:
+            Clear: =true
+            Default: ="Text input"
+            Format: =TextFormat.Number
+            MaxLength: =4
+            Mode: =TextMode.Password
+            X: =18
+            Y: =56
+            ZIndex: =1
+
+        Label2_172 As label:
+            Align: =Align.Center
+            Color: =RGBA(106, 108, 125, 1)
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =10
+            PaddingRight: =9.10
+            Size: =15
+            Text: ="Enter Pin"
+            Width: =276
+            X: =40
+            Y: =16
+            ZIndex: =2
+
+        Button8_11 As button:
+            DisplayMode: |
+                =If(
+                    And(
+                        !IsBlank(TextInput5_1.Text) ), 
+                    DisplayMode.Edit, 
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(109, 49, 162, 1)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: |-
+                =If(Int(TextInput5_1.Text) = Int(Decrypted),
+                    NewForm(Form1);
+                    Set(Authenticated, true);
+                    UpdateContext({ selectedRecordID: 0,showModal: true });
+                    Set(Container2_Visible, false);
+                    Set(wpinmsg, false),
+                    Set(wpinmsg, true))
+                    
+                    
+            Text: ="Submit"
+            Width: =138
+            X: =200
+            Y: =167
+            ZIndex: =5
+
+        Button8_10 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(242, 242, 242, 1)
+            HoverBorderColor: =ColorFade(Self.Fill, 20%)
+            HoverFill: =ColorFade(Self.Fill, -20%)
+            OnSelect: =Set(Container2_Visible, false);
+            Text: ="Cancel"
+            Width: =138
+            X: =18
+            Y: =167
+            ZIndex: =6
+
+        Label1 As label:
+            Color: =RGBA(255, 0, 0, 1)
+            Text: ="Wrong PIN, Enter Again"
+            Visible: =wpinmsg
+            Width: =205
+            X: =18
+            Y: =111
+            ZIndex: =7
+

@@ -1,0 +1,65 @@
+App As appinfo:
+    BackEnabled: =true
+    OnStart: |+
+        =If(IsBlank(LookUp(Auth, Email = User().Email)),Set(checkAuth, false), Set(checkAuth, true ));
+        Set(Authenticated, false);
+        Set(Decrypted, PIN_Decrypt.Run(User().Email).pin);
+        Refresh(Products);
+        Refresh(Inventories);
+        Refresh(PurchaseOrder);
+        Refresh(PurchaseOrderDetail);
+        Refresh(SalesOrder);
+        Refresh(SalesOrderDetail);
+        Refresh(Roles);
+        ClearCollect(PurchaseOrderCollection, {InventoryID: 0, Name: "", CostPrice: 0, RetailPrice: 0, Units: "", Quantity: 0, Total: 0});
+        ClearCollect(SalesOrderItems, Blank());
+        Set(ViewInvoice, false);
+        Set(GallContainerSize, 200);
+        ClearCollect(
+            colFilteredInventories,
+            Filter(
+                Inventories, 
+                ProductID.Id = SelectedGalleryItem.ID, 
+                QuantityAvailable <> 0
+            )
+        );
+        Set(varRole, LookUp(Roles, Person.Email = User().Email).Role.Value);
+        If(
+            varRole = "Inventory Manager1" || varRole = "Inventory Manager2",
+            ClearCollect(
+                SideBarGallery,
+                {Tab: "Product Inventory"},
+                {Tab: "Order Management"},
+                {Tab: "My Approvals"}
+            ),
+            If(
+                varRole = "Consumer",
+            ClearCollect(
+                SideBarGallery,
+                {Tab: "Products"},
+                {Tab: "My Orders"}
+            ),
+            ClearCollect(
+                SideBarGallery,
+                {Tab: "Product Inventory"},
+                {Tab: "Order Management"},
+                {Tab: "User Management"},
+                {Tab: "My Approvals"}
+            )
+        ));
+        
+        If(varRole = "Admin" || varRole = "Inventory Manage1" || varRole = "Inventory Manage2", Set(showPO, true), Set(showPO, false));
+        Set(varFromDate, DateValue("01 April 2023","en-GB")); Set(varToDate, Today()+1);
+        Set(AttatchInv, false)
+        
+        
+    StartScreen: =Screen5
+    Theme: =PowerAppsTheme
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
+
