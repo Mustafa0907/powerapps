@@ -463,7 +463,7 @@ Screen5_8 As screen:
                     If(ThisItem.Tab = "Cart", Navigate(Screen5_2));
                     If(ThisItem.Tab = "My Orders", Navigate(Screen5_5));
                     If(ThisItem.Tab = "Order Management", Navigate(Screen5_5));
-                    If(ThisItem.Tab = "User Management", Navigate(Screen5_8));
+                    If(ThisItem.Tab = "User Management", Navigate(Screen5_6));
                     If(ThisItem.Tab = "My Approvals", Navigate(Screen5_8));
                 RadiusBottomLeft: =0
                 RadiusBottomRight: =0
