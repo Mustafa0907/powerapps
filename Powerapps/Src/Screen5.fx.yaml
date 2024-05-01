@@ -2148,7 +2148,7 @@ Screen5 As screen:
 
         TextInput5 As text:
             Clear: =true
-            Default: ="Text input"
+            Default: =""
             Format: =TextFormat.Number
             MaxLength: =4
             Mode: =TextMode.Password
@@ -2212,7 +2212,7 @@ Screen5 As screen:
 
         TextInput5_1 As text:
             Clear: =true
-            Default: ="Text input"
+            Default: =""
             Format: =TextFormat.Number
             MaxLength: =4
             Mode: =TextMode.Password
