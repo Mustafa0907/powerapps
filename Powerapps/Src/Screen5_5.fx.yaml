@@ -1113,7 +1113,12 @@ Screen5_5 As screen:
                 Refresh(SalesOrder);
                 Refresh(SalesOrderDetail);
                 Refresh(Roles);
-                UpdateContext({showScreen5_2 : false})
+                UpdateContext({showScreen5_2 : false});
+                Office365Outlook.SendEmailV2(
+                    "m.mustafa.22206@khi.iba.edu.pk",
+                    "New PO created",
+                    "New PO created"
+                );
             RadiusBottomLeft: =15
             RadiusBottomRight: =15
             RadiusTopLeft: =15
