@@ -2183,6 +2183,7 @@ Screen5 As screen:
                 =Encrypt_PIN.Run(User().Email,"New",Int(TextInput5.Text));
                 Set(Container1_Visible, false);
                 Set(checkAuth, true );
+                Set(Decrypted, PIN_Decrypt.Run(User().Email).pin)
             Text: ="Submit"
             Width: =138
             X: =200
