@@ -96,7 +96,7 @@ Screen5_5 As screen:
                 Text: |
                     =ThisItem.Created
                 Width: =210
-                X: =710
+                X: =723
                 ZIndex: =3
 
             Label7_18 As label:
@@ -168,8 +168,8 @@ Screen5_5 As screen:
             Size: =15
             Text: ="Order Date"
             Width: =282
-            X: =731
-            Y: =219
+            X: =730
+            Y: =217
             ZIndex: =3
 
         Label2_92 As label:

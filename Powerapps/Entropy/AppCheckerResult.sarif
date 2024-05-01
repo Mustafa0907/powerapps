@@ -24,7 +24,7 @@
                 },
                 "region": {
                   "charLength": 3,
-                  "charOffset": 649,
+                  "charOffset": 674,
                   "snippet": {
                     "text": ".Id"
                   }
@@ -64,7 +64,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 653,
+                  "charOffset": 678,
                   "snippet": {
                     "text": "="
                   }
