@@ -1,9 +1,7 @@
 App As appinfo:
     BackEnabled: =true
     OnStart: |+
-        =If(IsBlank(LookUp(Auth, Email = User().Email)) && varRole <> "Consumer",Set(checkAuth, false), Set(checkAuth, true ));
-        Set(Authenticated, false);
-        Set(Decrypted, PIN_Decrypt.Run(User().Email).pin);
+        =
         Refresh(Products);
         Refresh(Inventories);
         Refresh(PurchaseOrder);
@@ -24,6 +22,9 @@ App As appinfo:
             )
         );
         Set(varRole, LookUp(Roles, Person.Email = User().Email).Role.Value);
+        If(IsBlank(LookUp(Auth, Email = User().Email)) && varRole <> "Consumer",Set(checkAuth, false), Set(checkAuth, true ));
+        Set(Authenticated, false);
+        Set(Decrypted, PIN_Decrypt.Run(User().Email).pin);
         If(
             varRole = "Inventory Manager1" || varRole = "Inventory Manager2",
             ClearCollect(
